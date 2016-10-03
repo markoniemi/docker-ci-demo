@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<scriptApproval plugin="script-security@1.22">
+  <approvedScriptHashes/>
+  <approvedSignatures>
+    <string>method java.util.Date getHours</string>
+    <string>new java.util.Date</string>
+  </approvedSignatures>
+  <aclApprovedSignatures/>
+  <approvedClasspathEntries/>
+  <pendingScripts/>
+  <pendingSignatures/>
+  <pendingClasspathEntries/>
+</scriptApproval>

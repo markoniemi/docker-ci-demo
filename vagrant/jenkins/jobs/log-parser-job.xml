@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.6">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.17">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.0">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+        <hudson.plugins.git.UserRemoteConfig>
+          <url>http://gogs:3000/niemimac/log-parser.git</url>
+          <credentialsId>2af3ce5b-9c1e-463e-a001-9b72c87987b0</credentialsId>
+        </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+        <hudson.plugins.git.BranchSpec>
+          <name>*/master</name>
+        </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="list"/>
+      <extensions/>
+    </scm>
+    <scriptPath>Jenkinsfile</scriptPath>
+  </definition>
+  <triggers/>
+</flow-definition>
