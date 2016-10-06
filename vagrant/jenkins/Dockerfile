@@ -24,7 +24,7 @@ COPY config/config.xml /usr/share/jenkins/ref/config.xml
 COPY config/scriptApproval.xml /usr/share/jenkins/ref/scriptApproval.xml
 
 # Jenkins Settings, i.e. Maven, Groovy, ...
-#COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
+COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
 #COPY config/hudson.plugins.groovy.Groovy.xml /usr/share/jenkins/ref/hudson.plugins.groovy.Groovy.xml
 #COPY config/maven-global-settings-files.xml /usr/share/jenkins/ref/maven-global-settings-files.xml
 
