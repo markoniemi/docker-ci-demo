@@ -1,20 +1,20 @@
 version: '2'
 
 networks:
-  prodnetwork:
+  ci-network:
     driver: bridge
 
 services:
  jenkins:
   container_name: jenkins
-  build: ./jenkins
-#  image: jenkins:2.7.4-alpine
+#  build: ./jenkins
+  image: jenkins:alpine
   ports:
     - "8080:8080"
   links:
     - sonarqube
   networks:
-    - prodnetwork
+    - ci-network
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/local/bin/docker:/usr/bin/docker
@@ -34,7 +34,7 @@ services:
    - "9000:9000"
    - "5432:5432"
   networks:
-    - prodnetwork
+    - ci-network
   depends_on:
     - sonardb
   environment:
@@ -45,7 +45,7 @@ services:
  sonardb:
   container_name: sonardb
   networks:
-    - prodnetwork
+    - ci-network
   #image: postgres
   # unofficial alpine based postgre
   image: kiasaki/alpine-postgres
@@ -58,7 +58,7 @@ services:
  gogs:
   container_name: gogs
   networks:
-    - prodnetwork
+    - ci-network
   image: gogs/gogs
   ports:
    - "10022:22"
@@ -68,7 +68,7 @@ services:
   # TODO move these to custom/conf/app.ini
   environment:
    - DB_TYPE=postgres
-   - HOST=sonardb:5432
+   - HOST=gogsdb:5432
    - NAME=gogs
    - USER=gogs
    - PASSWD=gogs   
@@ -78,7 +78,7 @@ services:
  gogsdb:
   container_name: gogsdb
   networks:
-    - prodnetwork
+    - ci-network
   image: kiasaki/alpine-postgres
   environment:
    - POSTGRES_USER=gogs

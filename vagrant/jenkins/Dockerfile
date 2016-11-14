@@ -1,4 +1,4 @@
-FROM jenkins:2.7.4-alpine
+FROM jenkins:alpine
 
 USER root
 # install sudo and curl
@@ -13,12 +13,6 @@ USER jenkins
 COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
 
-# Add default Jenkins Jobs
-COPY jobs/log-parser-job.xml /usr/share/jenkins/ref/jobs/log-parser-job/config.xml
-
-############################################
-# Configure Jenkins
-############################################
 # Jenkins settings
 COPY config/config.xml /usr/share/jenkins/ref/config.xml
 COPY config/scriptApproval.xml /usr/share/jenkins/ref/scriptApproval.xml
@@ -35,4 +29,5 @@ COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
 
 # tell Jenkins that no banner prompt for pipeline plugins is needed
 # see: https://github.com/jenkinsci/docker#preinstalling-plugins
-RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+#RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+

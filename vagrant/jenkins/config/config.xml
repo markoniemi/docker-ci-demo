@@ -1,24 +1,35 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <disabledAdministrativeMonitors>
-    <string>OldData</string>
-    <string>jenkins.diagnostics.SecurityIsOffMonitor</string>
-  </disabledAdministrativeMonitors>
-  <version>1.625.3</version>
+  <disabledAdministrativeMonitors/>
+  <version>2.19.2</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
-  <useSecurity>true</useSecurity>
-  <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
-  <securityRealm class="hudson.security.SecurityRealm$None"/>
+  <useSecurity>false</useSecurity>
+  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
+    <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
+  </authorizationStrategy>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>true</disableSignup>
+    <enableCaptcha>false</enableCaptcha>
+  </securityRealm>
   <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
-  <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
+  <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
   <jdks>
     <jdk>
       <name>JDK 1.8</name>
-      <home>/usr/lib/jvm/default-jvm/</home>
-      <properties/>
+      <home></home>
+      <properties>
+        <hudson.tools.InstallSourceProperty>
+          <installers>
+            <hudson.tools.JDKInstaller>
+              <id>jdk-8u112-oth-JPR</id>
+              <acceptLicense>true</acceptLicense>
+            </hudson.tools.JDKInstaller>
+          </installers>
+        </hudson.tools.InstallSourceProperty>
+      </properties>
     </jdk>
   </jdks>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
@@ -38,6 +49,9 @@
   <primaryView>All</primaryView>
   <slaveAgentPort>50000</slaveAgentPort>
   <label></label>
+  <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
+    <excludeClientIPFromCrumb>false</excludeClientIPFromCrumb>
+  </crumbIssuer>
   <nodeProperties/>
   <globalNodeProperties>
     <hudson.slaves.EnvironmentVariablesNodeProperty>
@@ -54,4 +68,6 @@
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
   </globalNodeProperties>
+  <noUsageStatistics>true</noUsageStatistics>
 </hudson>
+  
