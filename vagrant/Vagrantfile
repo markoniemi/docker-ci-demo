@@ -1,15 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-unless Vagrant.has_plugin?("vagrant-hostmanager")
-	system("vagrant plugin install vagrant-hostmanager")
-	raise("Plugin installed. Run command again.");
-end
+#unless Vagrant.has_plugin?("vagrant-hostmanager")
+#	system("vagrant plugin install vagrant-hostmanager")
+#	raise("Plugin installed. Run command again.");
+#end
 
-unless Vagrant.has_plugin?("vagrant-docker-compose")
-	system("vagrant plugin install vagrant-docker-compose")
-	raise("Plugin installed. Run command again.");
-end
+#unless Vagrant.has_plugin?("vagrant-docker-compose")
+#	system("vagrant plugin install vagrant-docker-compose")
+#	raise("Plugin installed. Run command again.");
+#end
 
 Vagrant.configure("2") do |config|
   config.vm.box = "blinkreaction/boot2docker"
