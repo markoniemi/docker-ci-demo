@@ -1,8 +1,27 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+unless Vagrant.has_plugin?("vagrant-hostmanager")
+	system("vagrant plugin install vagrant-hostmanager")
+	raise("Plugin installed. Run command again.");
+end
+
+unless Vagrant.has_plugin?("vagrant-docker-compose")
+	system("vagrant plugin install vagrant-docker-compose")
+	raise("Plugin installed. Run command again.");
+end
+
 Vagrant.configure("2") do |config|
   config.vm.box = "blinkreaction/boot2docker"
-  config.vm.hostname = 'docker-ci-demo'
-  config.vm.network :private_network, ip: "192.168.50.42"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 9000, host: 9000 
+#  config.hostmanager.enabled = true
+#  config.hostmanager.manage_host = true
+#  config.hostmanager.ignore_private_ip = false
+#  config.hostmanager.include_offline = true
+#  config.vm.hostname = 'docker-ci-demo'
+#  config.vm.network :private_network, ip: "192.168.50.42"
+#  config.vm.network :private_network, type = "dhcp"
+#  config.vm.provision :docker_compose, rebuild: true, run: "always", yml: "/vagrant/docker-compose.yml"
 end
