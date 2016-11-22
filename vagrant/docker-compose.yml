@@ -7,8 +7,8 @@ networks:
 services:
  jenkins:
   container_name: jenkins
-#  build: ./jenkins
-  image: jenkins:alpine
+  build: ./jenkins
+#  image: jenkins:alpine
   ports:
     - "8080:8080"
   links:
