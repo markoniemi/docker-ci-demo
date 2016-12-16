@@ -3,7 +3,7 @@ FROM jenkins:alpine
 USER root
 # install sudo and curl
 RUN apk add --update bash \
-      && apk add sudo curl busybox docker \
+      && apk add sudo \
       && rm -rf /var/cache/apk/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 

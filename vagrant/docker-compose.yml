@@ -27,6 +27,33 @@ services:
     - SONAR_PORT=9000
     - SONAR_DB_PORT=5432
 
+
+ maven-slave:
+  container_name: maven-slave
+  networks:
+    - ci-network
+#  image: maven:alpine
+  build: ./maven-slave
+  ports:
+    - "1022:22"
+#  depends_on:
+#    - jenkins
+  environment:
+    - USER=jenkins
+    - PASSWORD=j3nk1n5Rul35
+
+ alpine-ssh:
+  container_name: alpine-ssh
+  networks:
+    - ci-network
+#  image: maven:alpine
+  build: ./maven-slave
+  ports:
+    - "1023:22"
+  environment:
+    - USER=jenkins
+    - PASSWORD=j3nk1n5Rul35
+    
  sonarqube:
   container_name: sonarqube
   image: sonarqube:lts-alpine
@@ -85,3 +112,4 @@ services:
    - POSTGRES_PASSWORD=gogs
   volumes:
     - /opt/gogsdb/data:/var/lib/postgresql/data
+ 
